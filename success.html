@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Maajo's Kitchen - Order Confirmed!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+.success-page{min-height:80vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:#fafafa}
+.success-card{background:white;border-radius:24px;max-width:560px;width:100%;padding:48px 40px;box-shadow:0 16px 48px rgba(0,0,0,.10);text-align:center}
+.success-icon{font-size:4rem;margin-bottom:16px}
+.success-card h2{font-family:'Playfair Display',Georgia,serif;color:#C4161C;font-size:2rem;margin-bottom:10px}
+.success-sub{color:#777;font-size:14.5px;line-height:1.7;margin-bottom:28px}
+.order-summary-box{background:#fafafa;border:1.5px solid #eee;border-radius:14px;padding:20px 22px;text-align:left;margin-bottom:20px}
+.order-summary-box h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#aaa;margin-bottom:14px}
+.summary-row{display:flex;justify-content:space-between;font-size:13.5px;color:#555;margin-bottom:8px;gap:12px}
+.summary-row .item-name{flex:1}
+.summary-row .item-price{font-weight:600;color:#333;white-space:nowrap}
+.summary-divider{border:none;border-top:1.5px dashed #eee;margin:12px 0}
+.summary-total-row{display:flex;justify-content:space-between;font-size:15px;font-weight:700;color:#C4161C;margin-top:4px}
+.customer-info-box{background:#fff8e1;border:1.5px solid #ffd000;border-radius:12px;padding:14px 18px;text-align:left;font-size:13.5px;line-height:1.85;margin-bottom:22px;color:#555}
+.customer-info-box strong{color:#333}
+.success-whatsapp-btn{display:block;width:100%;padding:14px;background:#25D366;color:white;border-radius:50px;font-weight:700;font-size:15px;text-decoration:none;margin-bottom:12px;transition:background .2s}
+.success-whatsapp-btn:hover{background:#1da750}
+.success-back-btn{display:block;width:100%;padding:13px;background:white;color:#C4161C;border:2px solid #C4161C;border-radius:50px;font-weight:700;font-size:14px;text-decoration:none;transition:background .2s,color .2s}
+.success-back-btn:hover{background:#C4161C;color:white}
+.email-sent-note{font-size:12px;color:#aaa;margin-top:18px;line-height:1.6}
+</style>
+</head>
+<body>
+<header class="header">
+  <a href="index.html" class="logo">
+    <img src="logo.jpeg" alt="Logo" class="logo-img">
+    <span>Maajo's Kitchen</span>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html#menu">Menu</a>
+    <a href="services.html">Services</a>
+    <a href="checkout.html" class="nav-cta">Checkout</a>
+  </nav>
+</header>
+<div class="success-page">
+  <div class="success-card">
+    <div class="success-icon">&#127881;</div>
+    <h2>Payment Confirmed!</h2>
+    <p class="success-sub">Thank you for your order. Your payment was successful and we have received everything. We will be in touch shortly to confirm your order.</p>
+    <div class="order-summary-box">
+      <h4>Your Order</h4>
+      <div id="success-items"></div>
+      <hr class="summary-divider">
+      <div id="success-delivery-row" class="summary-row" style="display:none">
+        <span class="item-name">Delivery fee</span>
+        <span class="item-price" id="success-delivery-fee"></span>
+      </div>
+      <div class="summary-total-row">
+        <span>Total Paid</span>
+        <span id="success-total"></span>
+      </div>
+    </div>
+    <div class="customer-info-box" id="success-customer-info"></div>
+    <a href="https://wa.me/447485276057" target="_blank" class="success-whatsapp-btn">&#128172; Confirm via WhatsApp</a>
+    <a href="index.html" class="success-back-btn">&#8592; Back to Menu</a>
+    <p class="email-sent-note">&#128231; A confirmation email has been sent to you and to Maajo's Kitchen.</p>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-content">
+    <h4>Maajo's Kitchen</h4>
+    <p>61 North Lane, Aldershot, GU12 4QF<br>Phone: +44 7485 276057<br>Email: maajoskitchen@outlook.com</p>
+  </div>
+</footer>
+<script>
+emailjs.init("Mn288RG0feIE7MQhU");
+var EMAILJS_SERVICE_ID="service_hbvxk7k";
+var VENDOR_TEMPLATE_ID="template_order_vendor";
+var CUSTOMER_TEMPLATE_ID="template_order_customer";
+var VENDOR_EMAIL="maajoskitchen@outlook.com";
+var order=JSON.parse(localStorage.getItem("pendingOrder"));
+if(!order){window.location.href="index.html";}
+else{
+  var ic=document.getElementById("success-items");
+  order.items.forEach(function(item){
+    var row=document.createElement("div");
+    row.className="summary-row";
+    row.innerHTML='<span class="item-name">'+item.name+' x'+item.quantity+'</span><span class="item-price">£'+(item.price*item.quantity).toFixed(2)+'</span>';
+    ic.appendChild(row);
+  });
+  if(order.orderType==="delivery"&&parseFloat(order.deliveryFee)>0){
+    document.getElementById("success-delivery-row").style.display="flex";
+    document.getElementById("success-delivery-fee").textContent="£"+order.deliveryFee;
+  }
+  document.getElementById("success-total").textContent="£"+order.total;
+  document.getElementById("success-customer-info").innerHTML=
+    "<strong>Name:</strong> "+order.fullName+"<br>"+
+    "<strong>Phone:</strong> "+order.phone+"<br>"+
+    "<strong>Email:</strong> "+order.email+"<br>"+
+    "<strong>Order Type:</strong> "+(order.orderType==="delivery"?"Delivery":"Collection / Pickup")+"<br>"+
+    (order.address?"<strong>Address:</strong> "+order.address+"<br>":"")+
+    "<strong>Order Placed:</strong> "+order.placedAt;
+  var itemsList=order.items.map(function(i){return i.name+" x"+i.quantity+" = £"+(i.price*i.quantity).toFixed(2);}).join("\n");
+  var data={
+    customer_name:order.fullName,
+    customer_email:order.email,
+    customer_phone:order.phone,
+    order_type:order.orderType==="delivery"?"Delivery":"Collection / Pickup",
+    delivery_address:order.address||"N/A - Customer collecting",
+    order_items:itemsList,
+    order_subtotal:"£"+order.subtotal,
+    delivery_fee:order.orderType==="delivery"?"£"+order.deliveryFee:"N/A",
+    order_total:"£"+order.total,
+    order_date:order.placedAt,
+    reply_to:order.email
+  };
+  emailjs.send(EMAILJS_SERVICE_ID,VENDOR_TEMPLATE_ID,Object.assign({},data,{to_email:VENDOR_EMAIL}))
+    .then(function(){console.log("Vendor notified");})
+    .catch(function(e){console.error("Vendor email error:",e);});
+  emailjs.send(EMAILJS_SERVICE_ID,CUSTOMER_TEMPLATE_ID,Object.assign({},data,{to_email:order.email}))
+    .then(function(){console.log("Customer email sent");})
+    .catch(function(e){console.error("Customer email error:",e);});
+  localStorage.removeItem("cart");
+  localStorage.removeItem("pendingOrder");
+}
+</script>
+</body>
+</html>
