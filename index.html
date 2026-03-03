@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Maajo's Kitchen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <a href="index.html" class="logo">
+    <img src="logo.jpeg" alt="Logo" class="logo-img">
+    <span>Maajo's Kitchen</span>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html#menu">Menu</a>
+    <a href="services.html">Services</a>
+    <a href="checkout.html" class="nav-cta">Checkout</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h2>Homemade Small Chops, Crafted With Love</h2>
+    <p>Freshly prepared in small batches for corporate events, weddings, birthdays and private celebrations.</p>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="about">
+  <div class="about-container">
+    <h2>About Maajo's Kitchen</h2>
+    <p>
+      At Maajo's Kitchen, we bring flavor, elegance, and warmth to every table.
+      From handcrafted Nigerian delicacies to beautifully curated event catering,
+      we believe food is more than a meal — it's an experience.
+      Whether you're ordering for your home or hosting a grand celebration,
+      we serve every dish with passion and attention to detail.
+    </p>
+  </div>
+</section>
+
+<!-- ================= DELIVERY DISCLAIMER ================= -->
+<div class="delivery-disclaimer">
+  <span class="disclaimer-icon">🚚</span>
+  <p>
+    <strong>Delivery Notice:</strong> Home delivery is available for
+    <strong>Plantain Chips, Chin Chin, Nigerian Buns, Puff Puff</strong> and <strong>Meat Pie</strong> only.
+    All other items (Spring Rolls, Samosa, Chicken Wings, Fruit Salad) are available for
+    <strong>collection only.</strong> <strong>Delivery for other items would be available soon.</strong>
+    Contact us via WhatsApp for enquiries.
+  </p>
+</div>
+
+<!-- ================= MENU ================= -->
+<section class="menu" id="menu">
+  <h2 class="section-title">Our Menu</h2>
+
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <img src="Plantain.jpeg" alt="Plantain Chips">
+      <div class="card-info">
+        <h3>Plantain Chips</h3>
+        <span>From £8.19</span>
+        <button class="view-options-btn" onclick="openItemModal('plantain-chips')">🛒 Choose Options</button>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="chin chin.jpg" alt="Chin Chin">
+      <div class="card-info">
+        <h3>Chin Chin</h3>
+        <span>From £6.00</span>
+        <button class="view-options-btn" onclick="openItemModal('chin-chin')">🛒 Choose Options</button>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="salad.jpg" alt="Fruit Salad">
+      <div class="card-info">
+        <h3>Fruit Salad <span class="pickup-only-tag">Pickup Only</span></h3>
+        <span>From £8.19</span>
+        <button class="view-options-btn" onclick="openItemModal('fruit-salad')">🛒 Choose Options</button>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="puff puff b.jpeg" alt="Puff Puff">
+      <div class="card-info">
+        <h3>Puff Puff</h3>
+        <span>From £6.00</span>
+        <button class="view-options-btn" onclick="openItemModal('puff-puff')">🛒 Choose Options</button>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="image.png" alt="Samosa">
+      <div class="card-info">
+        <h3>Samosa <span class="pickup-only-tag">Pickup Only</span></h3>
+        <span>From £4.50</span>
+        <button class="view-options-btn" onclick="openItemModal('samosa')">🛒 Choose Options</button>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="spring rolls 2.jpeg" alt="Spring Rolls">
+      <div class="card-info">
+        <h3>Spring Rolls <span class="pickup-only-tag">Pickup Only</span></h3>
+        <span>From £24.00</span>
+        <button class="view-options-btn" onclick="openItemModal('spring-rolls')">🛒 Choose Options</button>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="wings.jpg" alt="Chicken Wings">
+      <div class="card-info">
+        <h3>Chicken Wings <span class="pickup-only-tag">Pickup Only</span></h3>
+        <span>From £25.00</span>
+        <button class="view-options-btn" onclick="openItemModal('chicken-wings')">🛒 Choose Options</button>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="meatpie.jpeg" alt="Meat Pie">
+      <div class="card-info">
+        <h3>Meat Pie</h3>
+        <span>From £8.00</span>
+        <button class="view-options-btn" onclick="openItemModal('meat-pie')">🛒 Choose Options</button>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="bonze.jpeg" alt="Nigerian Buns">
+      <div class="card-info">
+        <h3>Nigerian Buns</h3>
+        <span>From £8.00</span>
+        <button class="view-options-btn" onclick="openItemModal('nigerian-buns')">🛒 Choose Options</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== ITEM OPTIONS MODAL ===== -->
+<div class="item-modal-overlay" id="itemModalOverlay" onclick="closeItemModal(event)">
+  <div class="item-modal" id="itemModal">
+    <button class="item-modal-close" onclick="closeItemModalBtn()">&#10005;</button>
+    <div class="item-modal-image-wrap">
+      <img id="modalImage" src="" alt="">
+      <div id="modalPickupBadge" class="modal-pickup-badge" style="display:none">&#127978; Pickup Only</div>
+    </div>
+    <div class="item-modal-body">
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc" class="modal-desc"></p>
+      <div class="modal-options-label">Choose your size / quantity:</div>
+      <div class="modal-options-grid" id="modalOptionsGrid"></div>
+      <div class="modal-selected-info" id="modalSelectedInfo" style="display:none">
+        <span id="modalSelectedName"></span>
+        <span class="modal-selected-price" id="modalSelectedPrice"></span>
+      </div>
+      <button class="modal-add-btn" id="modalAddBtn" onclick="modalAddToCart()" disabled>Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CATERING SERVICES SECTION ================= -->
+<section class="catering" id="services">
+  <h2 class="section-title">Catering Services</h2>
+  <div class="catering-grid">
+    <div class="catering-box">
+      <h3>Corporate Events</h3>
+      <p>Premium small chops trays designed for office meetings and corporate functions.</p>
+    </div>
+    <div class="catering-box">
+      <h3>Weddings</h3>
+      <p>Elegant catering packages tailored for wedding receptions and engagement parties.</p>
+    </div>
+    <div class="catering-box">
+      <h3>Private Parties</h3>
+      <p>Birthdays, church events, and home celebrations handled with excellence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="gallery">
+  <h2 class="section-title">Our Work</h2>
+  <div class="gallery-container">
+    <div class="gallery-track">
+      <img src="Plantain.jpeg" alt="">
+      <img src="1.jpeg" alt="">
+      <img src="puff puff b.jpeg" alt="">
+      <img src="2.jpeg" alt="">
+      <img src="fruit.jpg" alt="">
+      <img src="plate.jpeg" alt="">
+      <img src="spring rolls 2.jpeg" alt="">
+      <img src="3.jpeg" alt="">
+      <img src="wings.jpg" alt="">
+      <img src="4.jpeg" alt="">
+      <img src="meatpie.jpeg" alt="">
+      <img src="5.jpeg" alt="">
+      <img src="bonze.jpeg" alt="">
+      <img src="7.jpeg" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- ================= EVENTS TEASER ================= -->
+<section class="events-teaser">
+  <h2 class="section-title">Planning an Event?</h2>
+  <p class="events-teaser-sub">
+    We bring authentic Nigerian flavours and elegant presentation to your most special moments —
+    from intimate gatherings to grand celebrations.
+  </p>
+  <div class="events-teaser-grid">
+    <div class="event-teaser-card">
+      <div class="event-teaser-icon">&#128141;</div>
+      <h3>Weddings</h3>
+      <p>Beautifully curated platters and full catering packages tailored to your big day.</p>
+    </div>
+    <div class="event-teaser-card">
+      <div class="event-teaser-icon">&#127881;</div>
+      <h3>Birthdays &amp; Parties</h3>
+      <p>From intimate dinners to big celebrations — we make every bite memorable.</p>
+    </div>
+    <div class="event-teaser-card">
+      <div class="event-teaser-icon">&#127970;</div>
+      <h3>Corporate Events</h3>
+      <p>Professional catering with premium presentation for meetings and launches.</p>
+    </div>
+    <div class="event-teaser-card">
+      <div class="event-teaser-icon">&#9962;</div>
+      <h3>Church &amp; Community</h3>
+      <p>Generous, well-priced packages for church events and community gatherings.</p>
+    </div>
+  </div>
+  <div class="events-teaser-cta">
+    <a href="services.html">Book an Event Enquiry &#8594;</a>
+  </div>
+</section>
+
+<!-- ================= WHATSAPP SECTION ================= -->
+<section class="whatsapp">
+  <h2>Custom Bookings &amp; Large Events</h2>
+  <p>Need a custom catering package? Let's discuss your event.</p>
+  <a href="https://wa.me/447359052741" target="_blank">Chat on WhatsApp</a>
+</section>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <button id="closeCart">&#10005;</button>
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="empty-cart">Your cart is empty.</p>
+  </div>
+  <div class="cart-footer">
+    <h3>Total: £<span id="cartTotal">0.00</span></h3>
+    <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- FLOATING CART -->
+<div class="floating-cart" id="floatingCart">
+  &#128722;
+  <span id="cartCount">0</span>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <h4>Maajo's Kitchen</h4>
+    <p>
+      61 North Lane, Aldershot, GU12 4QF<br>
+      Phone: +44 7485 276057<br>
+      Email: maajoskitchen@outlook.com
+    </p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

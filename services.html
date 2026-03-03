@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Maajo's Kitchen — Event Services</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">
+    <img src="logo.jpeg" alt="Logo" class="logo-img">
+    <span>Maajo's Kitchen</span>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html#menu">Menu</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="checkout.html" class="nav-cta">Checkout</a>
+  </nav>
+</header>
+
+<!-- SERVICES HERO -->
+<section class="services-hero">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h2>Event Catering Services</h2>
+    <p>Bringing authentic Nigerian flavours and elegance to your most special moments.</p>
+  </div>
+</section>
+
+<!-- WHAT WE OFFER -->
+<section class="services-section">
+  <h2 class="section-title">What We Offer</h2>
+  <p class="section-subtitle">From intimate gatherings to grand celebrations, we handle the food so you can enjoy the moment.</p>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">💍</div>
+      <h3>Weddings</h3>
+      <p>Make your wedding reception unforgettable with beautifully curated small chops platters and catering packages. We work closely with you to design a spread that matches your theme, guest count, and taste preferences.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🎉</div>
+      <h3>Birthday Parties</h3>
+      <p>Whether it's an intimate dinner or a big celebration, our small chops and Nigerian delicacies make the perfect crowd-pleasing addition. We cater for all ages with customised portions and presentation.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🏢</div>
+      <h3>Corporate Events</h3>
+      <p>Impress your clients and colleagues with premium catering for boardroom meetings, office parties, product launches and networking events. Professional presentation, punctual delivery, delicious food — guaranteed.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">⛪</div>
+      <h3>Church & Community Events</h3>
+      <p>Serving the community with warmth and flavour. We provide generous, well-priced catering for church programmes, naming ceremonies, thanksgiving services, and community gatherings of all sizes.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🎓</div>
+      <h3>Graduations & Milestones</h3>
+      <p>Celebrate your achievements with food that matches the occasion. Custom packages for graduation parties, baby showers, anniversaries, and any milestone worth marking.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🍽️</div>
+      <h3>Private Dining & Home Events</h3>
+      <p>Hosting at home? Let us take care of the food. We prepare and deliver restaurant-quality small chops and platters directly to your door — ready to serve so you can enjoy time with your guests.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<section class="services-gallery">
+  <h2 class="section-title">A Taste of Our Work</h2>
+  <div class="gallery-container">
+    <div class="gallery-track">
+      <img src="plate.jpeg" alt="Platter">
+      <img src="spring rolls 2.jpeg" alt="Spring Rolls">
+      <img src="puff puff b.jpeg" alt="Puff Puff">
+      <img src="Plantain.jpeg" alt="Plantain Chips">
+      <img src="meatpie.jpeg" alt="Meat Pie">
+      <img src="bonze.jpeg" alt="Nigerian Buns">
+      <img src="wings.jpg" alt="Chicken Wings">
+    </div>
+  </div>
+</section>
+
+<!-- ENQUIRY FORM -->
+<section class="enquiry-section">
+  <div class="enquiry-container">
+    <h2>Book Your Event</h2>
+    <p class="enquiry-subtitle">Fill in the form below and we'll get back to you within 24 hours to discuss your requirements.</p>
+
+    <div class="enquiry-form-card">
+      <form id="enquiry-form" class="enquiry-form" onsubmit="submitEnquiry(event)">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eq-name">Full Name *</label>
+            <input type="text" id="eq-name" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="eq-email">Email Address *</label>
+            <input type="email" id="eq-email" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eq-phone">Phone Number *</label>
+            <input type="tel" id="eq-phone" placeholder="+44 7000 000000" required>
+          </div>
+          <div class="form-group">
+            <label for="eq-event">Type of Event *</label>
+            <select id="eq-event" required>
+              <option value="" disabled selected>Select event type</option>
+              <option>Wedding</option>
+              <option>Birthday Party</option>
+              <option>Corporate Event</option>
+              <option>Church / Community Event</option>
+              <option>Graduation / Milestone</option>
+              <option>Private Dining</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eq-date">Event Date *</label>
+            <input type="date" id="eq-date" required>
+          </div>
+          <div class="form-group">
+            <label for="eq-guests">Estimated Guests *</label>
+            <input type="number" id="eq-guests" placeholder="e.g. 50" min="1" required>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="eq-address">Event Address *</label>
+          <input type="text" id="eq-address" placeholder="Full event address including postcode" required>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="eq-food">Food Preferences / Items Requested</label>
+          <input type="text" id="eq-food" placeholder="e.g. Spring Rolls, Puff Puff, Chin Chin, Plantain...">
+        </div>
+
+        <div class="form-group full-width">
+          <label for="eq-comments">Additional Comments</label>
+          <textarea id="eq-comments" rows="4" placeholder="Any dietary requirements, special requests, or questions..."></textarea>
+        </div>
+
+        <button type="submit" class="enquiry-submit-btn">Send Enquiry →</button>
+
+      </form>
+
+      <div id="form-success" class="form-success" style="display:none;">
+        <span>✅</span>
+        <p>Thank you! Your enquiry has been sent.</p>
+        <p>We'll be in touch within 24 hours to discuss your event.</p>
+        <p class="form-success-note">A summary has been sent to your email address.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- 24HR CONFIRMATION POPUP -->
+<div class="enquiry-popup-overlay" id="enquiryPopupOverlay">
+  <div class="enquiry-popup">
+    <div class="enquiry-popup-icon">✉️</div>
+    <h3>Enquiry Received!</h3>
+    <p>Thank you for reaching out to <strong>Maajo's Kitchen</strong>.</p>
+    <p>We'll review your event details and get back to you <strong>within 24 hours</strong> to discuss your requirements.</p>
+    <p class="popup-sub">In the meantime, feel free to reach us on WhatsApp for urgent enquiries.</p>
+    <a href="https://wa.me/447485276057" target="_blank" class="popup-whatsapp-btn">💬 Chat on WhatsApp</a>
+    <button class="popup-close-btn" onclick="closeEnquiryPopup()">Got it, thanks!</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <h4>Maajo's Kitchen</h4>
+    <p>
+      61 North Lane, Aldershot, GU12 4QF<br>
+      Phone: +44 7485 276057<br>
+      Email: maajoskitchen@outlook.com
+    </p>
+  </div>
+</footer>
+
+<script>
+  // ===== EMAILJS INIT =====
+  // Replace YOUR_EMAILJS_PUBLIC_KEY with your actual key from emailjs.com
+  emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+
+  function submitEnquiry(e) {
+    e.preventDefault();
+
+    const btn = document.querySelector(".enquiry-submit-btn");
+    const originalText = btn.textContent;
+    btn.textContent = "Sending...";
+    btn.disabled = true;
+
+    const formData = {
+      vendor_name: "Maajo's Kitchen",
+      customer_name: document.getElementById("eq-name").value,
+      customer_email: document.getElementById("eq-email").value,
+      customer_phone: document.getElementById("eq-phone").value,
+      event_type: document.getElementById("eq-event").value,
+      event_date: document.getElementById("eq-date").value,
+      guests: document.getElementById("eq-guests").value,
+      event_address: document.getElementById("eq-address").value,
+      food_preferences: document.getElementById("eq-food").value || "Not specified",
+      comments: document.getElementById("eq-comments").value || "None",
+      reply_to: document.getElementById("eq-email").value
+    };
+
+    // Send enquiry email to vendor
+    emailjs.send(
+      "service_az9yf0t",          // Replace with your EmailJS service ID
+      "template_be2buep",  // Replace with your vendor EmailJS template ID
+      formData
+    )
+    .then(() => {
+      document.getElementById("enquiry-form").style.display = "none";
+      document.getElementById("form-success").style.display = "flex";
+      showEnquiryPopup();
+    })
+    .catch((err) => {
+      console.error("EmailJS error:", err);
+      btn.textContent = originalText;
+      btn.disabled = false;
+      alert("There was a problem sending your enquiry. Please try again or contact us on WhatsApp.");
+    });
+  }
+
+  function showEnquiryPopup() {
+    document.getElementById("enquiryPopupOverlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeEnquiryPopup() {
+    document.getElementById("enquiryPopupOverlay").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+</script>
+</body>
+</html>
