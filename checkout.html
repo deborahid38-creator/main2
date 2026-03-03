@@ -5,6 +5,7 @@
     <title>Maajo's Kitchen — Checkout</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   </head>
   <body>
     <header class="header">
@@ -26,39 +27,31 @@
         <!-- ===== LEFT: ORDER SUMMARY ===== -->
         <div class="checkout-panel">
           <h3>Order Summary</h3>
+          <div id="checkout-items"></div>
 
-          <div id="checkout-items">
-            <!-- dynamically filled -->
-          </div>
-
-          <!-- Totals -->
           <div class="checkout-totals">
             <div class="totals-row">
               <span>Subtotal</span>
-              <span>£<span id="checkout-subtotal">0.00</span></span>
+              <span>&pound;<span id="checkout-subtotal">0.00</span></span>
             </div>
-            <div class="totals-row" id="delivery-fee-row" style="display: none">
+            <div class="totals-row" id="delivery-fee-row" style="display:none">
               <span>Delivery fee</span>
-              <span>£<span id="delivery-fee-amount">0.00</span></span>
+              <span>&pound;<span id="delivery-fee-amount">0.00</span></span>
             </div>
             <div class="totals-row total">
               <span>Total</span>
-              <span>£<span id="checkout-total">0.00</span></span>
+              <span>&pound;<span id="checkout-total">0.00</span></span>
             </div>
           </div>
 
-          <!-- Vendor pickup info — always visible, professional placement -->
           <div class="vendor-pickup-card">
-            <h4>📍 Collection Address</h4>
+            <h4>&#128205; Collection Address</h4>
             <strong>Maajo's Kitchen</strong><br />
             61 North Lane, Aldershot, GU12 4QF<br />
-            📞 +44 7485 276057<br />
-            ✉️ maajoskitchen@outlook.com
+            &#128222; +44 7485 276057<br />
+            maajoskitchen@outlook.com
             <br /><br />
-            <span style="font-size: 12px; color: #888"
-              >If you plan to collect, please confirm your order time via
-              WhatsApp after placing.</span
-            >
+            <span style="font-size:12px;color:#888">If you plan to collect, please confirm your order time via WhatsApp after placing.</span>
           </div>
         </div>
 
@@ -66,138 +59,72 @@
         <div class="checkout-panel">
           <h3>Delivery Details</h3>
 
-          <!-- Pickup-only warning (shown if cart has non-deliverable items) -->
-          <div
-            id="delivery-warning"
-            class="delivery-warning-box"
-            style="display: none"
-          >
-            ⚠️ Your order contains <strong>collection-only items</strong>.
-            Delivery is unavailable — please select <strong>Pickup</strong>.
+          <div id="delivery-warning" class="delivery-warning-box" style="display:none">
+            &#9888; Your order contains <strong>collection-only items</strong>.
+            Delivery is unavailable &mdash; please select <strong>Pickup</strong>.
           </div>
 
-          <!-- ORDER TYPE PILL TOGGLE -->
           <div class="order-type-toggle">
-            <input
-              type="radio"
-              name="orderType"
-              id="opt-delivery"
-              value="delivery"
-              checked
-            />
-            <label for="opt-delivery">🚚 Delivery</label>
-
-            <input
-              type="radio"
-              name="orderType"
-              id="opt-pickup"
-              value="pickup"
-            />
-            <label for="opt-pickup">🏪 Pickup</label>
+            <input type="radio" name="orderType" id="opt-delivery" value="delivery" checked />
+            <label for="opt-delivery">&#128666; Delivery</label>
+            <input type="radio" name="orderType" id="opt-pickup" value="pickup" />
+            <label for="opt-pickup">&#127978; Pickup</label>
           </div>
 
-          <!-- ALWAYS VISIBLE: name + phone -->
+          <!-- Name -->
           <label class="form-label">Full Name *</label>
-          <input
-            type="text"
-            id="full-name"
-            class="form-input"
-            placeholder="Your full name"
-            required
-          />
+          <input type="text" id="full-name" class="form-input" placeholder="Your full name" required />
 
-          <label class="form-label" style="margin-top: 12px"
-            >Phone Number *</label
-          >
-          <input
-            type="tel"
-            id="phone-number"
-            class="form-input"
-            placeholder="+44 7000 000000"
-            required
-          />
+          <!-- Phone -->
+          <label class="form-label" style="margin-top:12px">Phone Number *</label>
+          <input type="tel" id="phone-number" class="form-input" placeholder="+44 7000 000000" required />
 
-          <!-- PICKUP INFO BOX (shown when pickup selected) -->
-          <div
-            id="pickup-info-section"
-            class="pickup-info-box"
-            style="display: none; margin-top: 16px"
-          >
+          <!-- Email — NEW field for confirmation -->
+          <label class="form-label" style="margin-top:12px">
+            Email Address * <span style="font-size:11px;color:#aaa;font-weight:400;text-transform:none">(order confirmation will be sent here)</span>
+          </label>
+          <input type="email" id="customer-email" class="form-input" placeholder="your@email.com" required />
+
+          <!-- Pickup info box -->
+          <div id="pickup-info-section" class="pickup-info-box" style="display:none;margin-top:16px">
             <h4>Ready to collect?</h4>
-            Visit us at
-            <strong>61 North Lane, Aldershot, GU12 4QF</strong>.<br />
-            Please WhatsApp us on <strong>+44 7485 276057</strong> to arrange
-            your collection time after placing your order.
+            Visit us at <strong>61 North Lane, Aldershot, GU12 4QF</strong>.<br />
+            Please WhatsApp us on <strong>+44 7485 276057</strong> to arrange your collection time after placing your order.
           </div>
 
-          <!-- DELIVERY FIELDS (hidden when pickup selected) -->
-          <div id="delivery-fields" style="margin-top: 6px">
-            <label class="form-label" style="margin-top: 14px"
-              >Delivery Area *</label
-            >
+          <!-- Delivery address fields -->
+          <div id="delivery-fields" style="margin-top:6px">
+            <label class="form-label" style="margin-top:14px">Delivery Area *</label>
             <select id="delivery-area" class="form-input">
-              <option value="5">London — £5</option>
-              <option value="6">Manchester — £6</option>
-              <option value="5">Birmingham — £5</option>
-              <option value="6">Liverpool — £6</option>
-              <option value="5">Leeds — £5</option>
+              <option value="5">London &mdash; &pound;5</option>
+              <option value="6">Manchester &mdash; &pound;6</option>
+              <option value="5">Birmingham &mdash; &pound;5</option>
+              <option value="6">Liverpool &mdash; &pound;6</option>
+              <option value="5">Leeds &mdash; &pound;5</option>
             </select>
 
-            <label class="form-label" style="margin-top: 12px"
-              >Street Address *</label
-            >
-            <input
-              type="text"
-              id="street"
-              class="form-input"
-              placeholder="123 High Street"
-              required
-            />
+            <label class="form-label" style="margin-top:12px">Street Address *</label>
+            <input type="text" id="street" class="form-input" placeholder="123 High Street" required />
 
-            <label class="form-label" style="margin-top: 12px"
-              >Apartment / Suite</label
-            >
-            <input
-              type="text"
-              id="apartment"
-              class="form-input"
-              placeholder="Flat 2A (optional)"
-            />
+            <label class="form-label" style="margin-top:12px">Apartment / Suite</label>
+            <input type="text" id="apartment" class="form-input" placeholder="Flat 2A (optional)" />
 
-            <label class="form-label" style="margin-top: 12px">City *</label>
-            <input
-              type="text"
-              id="city"
-              class="form-input"
-              placeholder="London"
-              required
-            />
+            <label class="form-label" style="margin-top:12px">City *</label>
+            <input type="text" id="city" class="form-input" placeholder="London" required />
 
-            <label class="form-label" style="margin-top: 12px"
-              >Postcode *</label
-            >
-            <input
-              type="text"
-              id="postcode"
-              class="form-input"
-              placeholder="SW1A 1AA"
-              required
-            />
+            <label class="form-label" style="margin-top:12px">Postcode *</label>
+            <input type="text" id="postcode" class="form-input" placeholder="SW1A 1AA" required />
           </div>
 
-          <!-- PAYMENT -->
-          <div class="payment-options" style="margin-top: 24px">
+          <!-- Payment -->
+          <div class="payment-options" style="margin-top:24px">
             <h4>Payment Method</h4>
-            <button class="payment-btn" id="stripe-btn">
-              💳 Pay with Stripe
+            <button class="payment-btn" id="stripe-btn" style="border-color:#C4161C;background:#C4161C;color:white;">
+              &#128179; Pay Securely with Card (Stripe)
             </button>
-            <button class="payment-btn" id="paypal-btn">
-              🅿️ Pay with PayPal
-            </button>
-            <button class="payment-btn" id="bank-btn">🏦 Bank Transfer</button>
           </div>
 
-          <button class="place-order-btn" id="place-order">Place Order</button>
+          <button class="place-order-btn" id="place-order">&#128274; Proceed to Payment</button>
         </div>
       </div>
     </section>
